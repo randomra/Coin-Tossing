@@ -17,7 +17,7 @@ public class BotState {
 		this.blue_left = blue_left;
 		this.red_left = red_left;
 		states = new ArrayList<String>();
-		states.add("empty");
+		states.add("");
 		runtime = 0;
 	}
 }

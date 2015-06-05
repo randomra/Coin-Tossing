@@ -2,7 +2,6 @@ package main;
 
 import java.util.Arrays;
 
-import bots.Action;
 import bots.Bot;
 
 public class Game {

@@ -3,37 +3,37 @@ package main;
 import bots.*;
 
 /**
- * INSTRUCTIONS: Add your bot to the array bots
+ * INSTRUCTIONS: Add your bot to the `bots` array
  */
 
 public class Controller {
-	public static final int ROUNDS = 1000;
+	public static final int NUMBER_OF_GAMES = 1000;
 	public static final boolean VERBOSE = false;// true;
 	public static final long TIMEOUT = 10 * 1000000; // Nanoseconds per Turn (10
 														// ms)
 	public static final int BLUE_LEVER_COUNT = 5;
 	public static final int RED_LEVER_COUNT = 20;
-	public static final int COINTOSS_NUMBER = 100;
+	public static final int COINTOSS_ROUNDS = 100;
 
 	// Add your Bot class in this array.
 	Bot[] bots = new Bot[] { new OldscoolBot(), new RandomBot() };
 	int[][][] res;
 
 	Controller() {
-		res = new int[bots.length][bots.length][ROUNDS];
+		res = new int[bots.length][bots.length][NUMBER_OF_GAMES];
 	}
 
 	/**
 	 * Runs all the games
 	 */
 	public void playGames() {
-		Game game = new Game(BLUE_LEVER_COUNT, RED_LEVER_COUNT, COINTOSS_NUMBER, TIMEOUT, VERBOSE);
+		Game game = new Game(BLUE_LEVER_COUNT, RED_LEVER_COUNT, COINTOSS_ROUNDS, TIMEOUT, VERBOSE);
 		System.out.println("Playing games.");
 		// for each unique pairing of bots
 		for (int i = 0; i < bots.length; i++) {
 			for (int j = i + 1; j < bots.length; j++) {
 				int sum = 0;
-				for (int k = 0; k < ROUNDS; k++) {
+				for (int k = 0; k < NUMBER_OF_GAMES; k++) {
 					res[i][j][k] = game.play(bots[i], bots[j]);
 					sum += res[i][j][k];
 				}
@@ -56,7 +56,7 @@ public class Controller {
 		}
 
 		System.out.println("");
-		System.out.println("Results of the games (" + Integer.toString(ROUNDS)
+		System.out.println("Results of the games (" + Integer.toString(NUMBER_OF_GAMES)
 				+ " rounds):");
 
 		// store chart
@@ -66,11 +66,11 @@ public class Controller {
 			for (int j = 0; j < bots.length; j++) {
 				if (j > i) {
 					sum = 0;
-					for (int k = 0; k < ROUNDS; k++) {
+					for (int k = 0; k < NUMBER_OF_GAMES; k++) {
 						sum += res[i][j][k];
 					}
 					chart[i][j] = sum;
-					chart[j][i] = 2*ROUNDS-sum;
+					chart[j][i] = 2*NUMBER_OF_GAMES-sum;
 				} else if (j == i) {
 					chart[i][j] = 0;
 				}

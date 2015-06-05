@@ -1,4 +1,7 @@
 package bots;
+
+import main.Action;
+
 public interface Bot {
 	public String getName();
 

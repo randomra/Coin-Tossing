@@ -1,5 +1,7 @@
 package bots;
 
+import main.Action;
+
 public class OldscoolBot implements Bot {
 
 	@Override

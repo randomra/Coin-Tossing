@@ -1,4 +1,4 @@
-package bots;
+package main;
 
 public class Action {
 

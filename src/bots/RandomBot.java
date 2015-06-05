@@ -1,5 +1,6 @@
 package bots;
 
+import main.Action;
 import main.Game;
 
 public class RandomBot implements Bot {
