@@ -16,7 +16,7 @@ public class Controller {
 	public static final int COINTOSS_ROUNDS = 100;
 
 	// Add your Bot class in this array.
-	Bot[] bots = new Bot[] { new TestBot(), new TestBot(), new OldscoolBot(),
+	Bot[] bots = new Bot[] { /*new TestBot(), new TestBot(),*/ new OldscoolBot(),
 			new RandomBot() };
 	int[][][] res;
 
