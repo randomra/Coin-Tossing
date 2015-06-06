@@ -1,7 +1,5 @@
 package main;
 
-import java.util.Arrays;
-
 import bots.Bot;
 
 public class Game {
@@ -36,8 +34,7 @@ public class Game {
 		int[] moves = new int[2];
 
 		if (verbose) {
-			System.out.println(p1.getName() + " (1) vs " + p2.getName()
-					+ " (0):");
+			print(p1.getName() + " (coin 1) vs " + p2.getName() + " (coin 0):");
 		}
 
 		while (turn < turns + 1) {
@@ -58,7 +55,7 @@ public class Game {
 					action = bs.bot.takeTurn(bs.blue_left, bs.red_left,
 							relative_history, bs.states.get(turn - 1), turn);
 				} catch (Exception e) {
-					System.out.println(bs.bot.getName()
+					print(bs.bot.getName()
 							+ " should be disqualified! (runtime error)");
 					action = new Action(0, "");
 				}
@@ -89,17 +86,11 @@ public class Game {
 				second = 1;
 			}
 
-			if (verbose) {
-				System.out.println("score = "
-						+ Integer.toString(Game.totalScore(history))
-						+ ", coins = " + history);
-				System.out.println("P1 acts " + moves[0] + ", P2 acts "
-						+ moves[1]);
-			}
-
 			// blocking happened
-			if (Arrays.asList(moves).contains(-1)) {
-				block_turn = turn;
+			for (int move : moves) {
+				if (move == -1) {
+					block_turn = turn;
+				}
 			}
 
 			int next_turn = turn + 1;
@@ -112,9 +103,36 @@ public class Game {
 					next_turn = move;
 				}
 			}
-			
-			// todo bs.state update for reverter
-			// reverter should keep state
+
+			// state update for reverter to keep state in the next round
+			for (int i : new int[] { 0, 1 }) {
+				if (moves[i] == next_turn) {
+					botStates[i].states.set(next_turn - 1,
+							botStates[i].states.get(turn));
+				}
+			}
+
+			if (verbose) {
+				print("score = " + Integer.toString(Game.totalScore(history))
+						+ ", coins = " + history);
+				for (int i : new int[] { 0, 1 }) {
+					if (moves[i] == -1) {
+						print(botStates[i].bot.getName() + " blocks.");
+					}
+					if (moves[i] > 0) {
+						print(botStates[i].bot.getName()
+								+ " tries to revert to round "
+								+ Integer.toString(moves[i]) + ".");
+					}
+				}
+				if (next_turn == turn + 1) {
+					print("No revert. Next round is round "
+							+ Integer.toString(next_turn) + ".");
+				} else {
+					print("Revert to round " + Integer.toString(next_turn)
+							+ ".");
+				}
+			}
 
 			turn = next_turn;
 
@@ -125,21 +143,22 @@ public class Game {
 		}
 
 		if (verbose) {
-			System.out
-					.println("Match result: P1 "
-							+ Integer.toString((int) Math
-									.signum(totalScore(history)) + 1)
-							+ " - "
-							+ Integer.toString(1 - (int) Math
-									.signum(totalScore(history)))
-							+ " P2 (final score difference (P1-P2) is "
-							+ Integer.toString(totalScore(history))
-							+ ", coins are " + history + ")");
+			print("Match result: "
+					+ botStates[0].bot.getName()
+					+ " "
+					+ Integer
+							.toString((int) Math.signum(totalScore(history)) + 1)
+					+ " - "
+					+ Integer.toString(1 - (int) Math
+							.signum(totalScore(history))) + " "
+					+ botStates[1].bot.getName()
+					+ " (final coin difference is "
+					+ Integer.toString(totalScore(history))
+					+ " (P1's coins - P2's coins))");
 		}
 		for (BotState bs : botStates) {
 			if (bs.runtime > timeout * abs_turn) {
-				System.out.println(bs.bot.getName()
-						+ " should be disqualified! (timeout)");
+				print(bs.bot.getName() + " should be disqualified! (timeout)");
 			}
 		}
 
@@ -159,5 +178,12 @@ public class Game {
 			score += (c == '1' ? 1 : -1);
 		}
 		return score;
+	}
+
+	/**
+	 * print helper function
+	 */
+	public static void print(String s) {
+		System.out.println(s);
 	}
 }
