@@ -45,9 +45,11 @@ public class Game {
 			// ask each bot for action
 			int second = 0;
 			for (BotState bs : botStates) {
-				String relative_history = "";
-				for (Character c : history.toCharArray()) {
-					relative_history += ((c == '1' ^ second == 1) ? '1' : '0');
+				String relative_history= null;
+				if (second==1) {
+					relative_history = history.replace('1','x').replace('0','1').replace('x','0');
+				} else {
+					relative_history = history;
 				}
 				long startTime = System.nanoTime();// measure time
 				Action action = null;
