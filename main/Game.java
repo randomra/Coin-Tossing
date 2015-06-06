@@ -112,6 +112,9 @@ public class Game {
 					next_turn = move;
 				}
 			}
+			
+			// todo bs.state update for reverter
+			// reverter should keep state
 
 			turn = next_turn;
 

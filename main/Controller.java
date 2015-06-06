@@ -27,7 +27,8 @@ public class Controller {
 	 * Runs all the games
 	 */
 	public void playGames() {
-		Game game = new Game(BLUE_LEVER_COUNT, RED_LEVER_COUNT, COINTOSS_ROUNDS, TIMEOUT, VERBOSE);
+		Game game = new Game(BLUE_LEVER_COUNT, RED_LEVER_COUNT,
+				COINTOSS_ROUNDS, TIMEOUT, VERBOSE);
 		System.out.println("Playing games.");
 		// for each unique pairing of bots
 		for (int i = 0; i < bots.length; i++) {
@@ -56,8 +57,8 @@ public class Controller {
 		}
 
 		System.out.println("");
-		System.out.println("Results of the games (" + Integer.toString(NUMBER_OF_GAMES)
-				+ " rounds):");
+		System.out.println("Results of the games ("
+				+ Integer.toString(NUMBER_OF_GAMES) + " rounds):");
 
 		// store chart
 		int[][] chart = new int[bots.length][bots.length];
@@ -70,7 +71,7 @@ public class Controller {
 						sum += res[i][j][k];
 					}
 					chart[i][j] = sum;
-					chart[j][i] = 2*NUMBER_OF_GAMES-sum;
+					chart[j][i] = 2 * NUMBER_OF_GAMES - sum;
 				} else if (j == i) {
 					chart[i][j] = 0;
 				}
@@ -97,7 +98,7 @@ public class Controller {
 		System.out.print("Total Scores:");
 		for (int i = 0; i < bots.length; i++) {
 			System.out.println("");
-			System.out.print(bots[i].getName() + ":\t");
+			System.out.print(bots[i].getName() + ": ");
 			// looping over bots (each bots a column)
 			sum = 0;
 			for (int j = 0; j < bots.length; j++) {
