@@ -7,7 +7,7 @@ import bots.*;
  */
 
 public class Controller {
-	public static final int NUMBER_OF_GAMES = 10;
+	public static final int NUMBER_OF_GAMES = 1000;
 	public static final boolean VERBOSE = true;
 	public static final long TIMEOUT = 10 * 1000000; // Nanoseconds per Turn (10
 														// ms)
@@ -118,7 +118,7 @@ public class Controller {
 	}// main
 
 	/**
-	 * print helper function
+	 * print helper function, alias for System.out.println(s)
 	 */
 	public static void print(String s) {
 		System.out.println(s);
