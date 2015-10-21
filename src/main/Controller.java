@@ -8,7 +8,7 @@ import bots.*;
 
 public class Controller {
 	public static final int NUMBER_OF_GAMES = 1000;
-	public static final boolean VERBOSE = true;
+	public static final boolean VERBOSE = false;
 	public static final long TIMEOUT = 10 * 1000000; // Nanoseconds per Turn (10
 														// ms)
 	public static final int BLUE_LEVER_COUNT = 5;
@@ -16,9 +16,11 @@ public class Controller {
 	public static final int COINTOSS_ROUNDS = 100;
 
 	// Add your Bot class in this array.
-	Bot[] bots = new Bot[] { /*new TestBot(), new TestBot(),*/ new OldscoolBot(),
-			new RandomBot() };
-	int[][][] res;
+	private final Bot[] bots = new Bot[] {
+			new OldschoolBot(), 
+			new RandomBot() 
+			};
+	private int[][][] res;
 
 	Controller() {
 		res = new int[bots.length][bots.length][NUMBER_OF_GAMES];
