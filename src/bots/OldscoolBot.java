@@ -2,7 +2,7 @@ package bots;
 
 import main.Action;
 
-public class OldschoolBot implements Bot {
+public class OldscoolBot implements Bot {
 
 	@Override
 	public String getName() {
