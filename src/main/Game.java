@@ -45,9 +45,10 @@ public class Game {
 			// ask each bot for action
 			int second = 0;
 			for (BotState bs : botStates) {
-				String relative_history= null;
-				if (second==1) {
-					relative_history = history.replace('1','x').replace('0','1').replace('x','0');
+				String relative_history = null;
+				if (second == 1) {
+					relative_history = history.replace('1', 'x')
+							.replace('0', '1').replace('x', '0');
 				} else {
 					relative_history = history;
 				}
@@ -58,7 +59,8 @@ public class Game {
 							relative_history, bs.states.get(turn - 1), turn);
 				} catch (Exception e) {
 					print(bs.bot.getName()
-							+ " should be disqualified! (runtime error)");
+							+ " should be disqualified! (runtime error: "
+							+ e.toString() + ")");
 					action = new Action(0, "");
 				}
 				long endTime = System.nanoTime();// measure time

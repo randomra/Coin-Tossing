@@ -18,7 +18,10 @@ public class Controller {
 	// Add your Bot class in this array.
 	private final Bot[] bots = new Bot[] {
 			new OldschoolBot(), 
-			new RandomBot() 
+			new RandomBot(),
+			new RegretBot(),
+			new Nostalgia(),
+			new LittleTen()
 			};
 	private int[][][] res;
 
