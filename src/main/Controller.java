@@ -21,7 +21,12 @@ public class Controller {
 			new RandomBot(),
 			new RegretBot(),
 			new Nostalgia(),
-			new LittleTen()
+			new LittleTen(),
+			new Analyzer(),
+			new NoRegretsBot(),
+			new Oracle(),
+			new Dejavu(),
+			new BadLoser()
 			};
 	private int[][][] res;
 
